@@ -59,10 +59,12 @@ public class WeatherFragment extends Fragment {
     }
 
     private void updateWeatherData(final String city){
+        Log.d("Text" ,"I came at changeCity-2");
         new Thread(){
             public void run(){
                 final JSONObject json = RemoteFetch.getJSON(getActivity(), city);
                 if(json == null){
+                    Log.d("Text" ,"I came at changeCity-3");
                     handler.post(new Runnable(){
                         public void run(){
                             Toast.makeText(getActivity(),
@@ -71,6 +73,7 @@ public class WeatherFragment extends Fragment {
                         }
                     });
                 } else {
+                    Log.d("Text" ,"I came at changeCity-4");
                     handler.post(new Runnable(){
                         public void run(){
                             renderWeather(json);
@@ -101,6 +104,7 @@ public class WeatherFragment extends Fragment {
             String updatedOn = df.format(new Date(json.getLong("dt")*1000));
             updatedField.setText("Last update: " + updatedOn);
 
+            Log.d("Text" ,"I came at changeCity-5");
             setWeatherIcon(details.getInt("id"),
                     json.getJSONObject("sys").getLong("sunrise") * 1000,
                     json.getJSONObject("sys").getLong("sunset") * 1000);
@@ -111,6 +115,7 @@ public class WeatherFragment extends Fragment {
     }
 
     private void setWeatherIcon(int actualId, long sunrise, long sunset){
+        Log.d("Text" ,"I came at changeCity-6");
         int id = actualId / 100;
         String icon = "";
         if(actualId == 800){
@@ -136,10 +141,13 @@ public class WeatherFragment extends Fragment {
                     break;
             }
         }
+        Log.d("Text" ,"I came at changeCity-7");
         weatherIcon.setText(icon);
     }
 
-    public void changeCity(String city){
+    public void changeCity(String city)
+    {
+        Log.d("Text" ,"I came at changeCity");
         updateWeatherData(city);
     }
 

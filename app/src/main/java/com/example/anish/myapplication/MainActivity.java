@@ -121,6 +121,7 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -129,26 +130,22 @@ public class MainActivity extends ActionBarActivity implements
         }
 
 
-//        Log.d("Location Updates","fetch1");
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        mResultReceiver = new AddressResultReceiver(new Handler());
-//
-//        mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
-//        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-//        mFetchAddressButton = (Button) findViewById(R.id.fetch_address_button);
-//
-//        // Set defaults, then update using values stored in the Bundle.
-//        mAddressRequested = false;
-//        mAddressOutput = "";
-//        updateValuesFromBundle(savedInstanceState);
-//
-//        updateUIWidgets();
-//        buildGoogleApiClient();
+        Log.d("Location Updates","fetch1");
+        setContentView(R.layout.activity_main);
 
-    //    super.onCreate(savedInstanceState);
-    //    setContentView(R.layout.activity_main);
+        mResultReceiver = new AddressResultReceiver(new Handler());
+
+        mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        mFetchAddressButton = (Button) findViewById(R.id.fetch_address_button);
+
+        // Set defaults, then update using values stored in the Bundle.
+        mAddressRequested = false;
+        mAddressOutput = "";
+        updateValuesFromBundle(savedInstanceState);
+
+        updateUIWidgets();
+        buildGoogleApiClient();
 
 
 
@@ -188,13 +185,13 @@ public class MainActivity extends ActionBarActivity implements
     public void changeCity(String city){
         WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.container);
-//        wf.changeCity(city);
-//        new CityPreference(this).setCity(city);
-//        wf.changeCity(mAddressOutput);
-//        new CityPreference(this).setCity(mAddressOutput);
+        wf.changeCity(city);
+        new CityPreference(this).setCity(city);
+        wf.changeCity(mAddressOutput);
+        new CityPreference(this).setCity(mAddressOutput);
 
-                wf.changeCity("Bryan US");
-        new CityPreference(this).setCity("Bryan US");
+//                wf.changeCity("Bryan US");
+//        new CityPreference(this).setCity("Bryan US");
 
     }
 
@@ -239,20 +236,20 @@ public class MainActivity extends ActionBarActivity implements
      */
     public void fetchAddressButtonHandler(View view) {
 
- //       We only start the service to fetch the address if GoogleApiClient is connected.
-//        if (mGoogleApiClient.isConnected()) {
-//            Log.d("Location Updates", "I am connected");
-//            if (mLastLocation != null) {
-//                Log.d("Location Updates", "fetch.");
-//                startIntentService();
-//            }
-//
-//        }
-//        // If GoogleApiClient isn't connected, we process the user's request by setting
-//        // mAddressRequested to true. Later, when GoogleApiClient connects, we launch the service to
-//        // fetch the address. As far as the user is concerned, pressing the Fetch Address button
-//        // immediately kicks off the process of getting the address.
-//        mAddressRequested = true;
+     //   We only start the service to fetch the address if GoogleApiClient is connected.
+        if (mGoogleApiClient.isConnected()) {
+            Log.d("Location Updates", "I am connected");
+            if (mLastLocation != null) {
+                Log.d("Location Updates", "fetch.");
+                startIntentService();
+            }
+
+        }
+        // If GoogleApiClient isn't connected, we process the user's request by setting
+        // mAddressRequested to true. Later, when GoogleApiClient connects, we launch the service to
+        // fetch the address. As far as the user is concerned, pressing the Fetch Address button
+        // immediately kicks off the process of getting the address.
+        mAddressRequested = true;
 //        Log.d("Location Updates","fetch2");
 //        updateUIWidgets();
         startIntentService();
@@ -288,7 +285,7 @@ public class MainActivity extends ActionBarActivity implements
         if (mLastLocation != null) {
 
             Log.d("Location Updates","fetch-onConnected-2");
-            // Determine whether a Geocoder is available.
+            // Dtermine whether a Geocoder is available.
             if (!Geocoder.isPresent()) {
 
                 Log.d("Location Updates","fetch-onConnected-3");
@@ -352,6 +349,16 @@ public class MainActivity extends ActionBarActivity implements
     protected void displayAddressOutput() {
         Log.d("Location Updates", "fetch7");
         mLocationAddressTextView.setText(mAddressOutput);
+        WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.container);
+  //      wf.changeCity(city);
+//        new CityPreference(this).setCity(city);
+         //   wf.changeCity(mAddressOutput);
+        wf.changeCity("Delhi");
+
+//        new CityPreference(this).setCity(mAddressOutput);
+
+
     }
 
     /**
